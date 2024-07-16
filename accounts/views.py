@@ -185,7 +185,7 @@ def forgotPassword(request):
             messages.success(request, 'Se ha enviado un correo electrónico de restablecimiento de contraseña a su dirección de correo electrónico.')
             return redirect('login')
         else:
-            messages.error(request, 'La cuenta no existe.!')
+            messages.error(request, 'La cuenta no existe!')
             return redirect('forgotPassword')
     return render(request, 'accounts/forgotPassword.html')
 

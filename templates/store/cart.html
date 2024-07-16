@@ -9,10 +9,10 @@
 
 <!-- ============================ COMPONENT 1 ================================= -->
 {% if not cart_items %}
-	<h2 class="text-center">Your Shopping Cart is Empty</h2>
+	<h2 class="text-center">Tu carro de compras esta vacio</h2>
 	<br>
 	<div class="text-center">
-		<a href="{% url 'store' %}" class="btn btn-primary">Continue Shopping</a>
+		<a href="{% url 'store' %}" class="btn btn-primary">Continuar comprando</a>
 	</div>
 {% else %}
 <div class="row">
@@ -21,9 +21,9 @@
 <table class="table table-borderless table-shopping-cart">
 <thead class="text-muted">
 <tr class="small text-uppercase">
-  <th scope="col">Product</th>
-  <th scope="col" width="120">Quantity</th>
-  <th scope="col" width="120">Price</th>
+  <th scope="col">Producto</th>
+  <th scope="col" width="120">Cantidad</th>
+  <th scope="col" width="120">Precio</th>
   <th scope="col" class="text-right" width="200"> </th>
 </tr>
 </thead>
@@ -69,7 +69,7 @@
 	<td>
 		<div class="price-wrap">
 			<var class="price">$ {{ cart_item.sub_total }}</var>
-			<small class="text-muted"> $ {{ cart_item.product.price }} each </small>
+			<small class="text-muted"> $ {{ cart_item.product.price }} cada </small>
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right">
@@ -88,15 +88,15 @@
 		<div class="card">
 		<div class="card-body">
 			<dl class="dlist-align">
-			  <dt>Total price:</dt>
+			  <dt>Precio subtotal:</dt>
 			  <dd class="text-right">$ {{total}}</dd>
 			</dl>
 			<dl class="dlist-align">
-			  <dt>Tax:</dt>
+			  <dt>Envio:</dt>
 			  <dd class="text-right"> $ {{tax}}</dd>
 			</dl>
 			<dl class="dlist-align">
-			  <dt>Grand Total:</dt>
+			  <dt>Precio total:</dt>
 			  <dd class="text-right text-dark b"><strong>$ {{grand_total}}</strong></dd>
 			</dl>
 			<hr>
@@ -104,7 +104,7 @@
 				<img src="{% static './images/misc/payments.png' %}" height="26">
 			</p>
 			<a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
-			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continuar comprando</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
 
