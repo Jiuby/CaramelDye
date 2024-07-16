@@ -1,0 +1,91 @@
+{% load math_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        #header {
+            background: #50b3a2;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #E8491D 3px solid;
+        }
+        #header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <h1>Factura</h1>
+        </div>
+        <div class="content">
+            <h2>Detalles del Pedido</h2>
+            <p><strong>Numero de ordenr:</strong> {{ order.order_number }}</p>
+            <p><strong>Nombre:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+            <p><strong>Direccion:</strong> {{ order.address_line_1 }}, {{ order.address_line_2 }}, {{ order.city }}, {{ order.state }}, {{ order.postalcode }}</p>
+            <p><strong>Correo:</strong> {{ order.email }}</p>
+            <p><strong>Telefono:</strong> {{ order.phone }}</p>
+            <p><strong>Subtotal:</strong> ${{ order.order_total|subtract:order.tax }}</p>
+
+            <p><strong>Envio:</strong> ${{ order.tax }}</p>
+            <p><strong>Total:</strong> ${{ order.order_total }}</p>
+
+            <h2>Productos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Foto</th>
+                        <th>Variaciones</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order_products %}
+                    <tr>
+                        <td>{{ item.product.product_name }}</td>
+                        <td><img src="{{ item.product.images.url }}" alt="{{ item.product.product_name }}" style="width: 100px;"></td>
+                        <td>
+                            {% for variation in item.variations.all %}
+                                {{ variation.variation_category }}: {{ variation.variation_value }} <br>
+                            {% endfor %}
+                        </td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.product_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

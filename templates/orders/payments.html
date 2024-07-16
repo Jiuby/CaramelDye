@@ -133,7 +133,7 @@
 
 
 						<div id="invoice-button-container">
-                            <button class="custom-button">Descargar Factura</button>
+                            <a href="{% url 'invoice_pdf' order.id %}" class="custom-button">Descargar Factura</a>
                             <button class="custom-button">Whatsapp</button>
                         </div>
 

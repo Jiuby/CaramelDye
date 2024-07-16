@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from carts.models import CartItem
+from carts.models import CartItem, Cart
 from .forms import OrderForm
 import datetime
 from .models import Order, Payment, OrderProduct
@@ -8,6 +8,8 @@ import json
 from store.models import Product
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from xhtml2pdf import pisa
+from django.template.loader import get_template
 
 
 def payments(request):
@@ -74,11 +76,11 @@ def payments(request):
     }
     return JsonResponse(data)
 
-def place_order(request, total=0, quantity=0,):
+def place_order(request, total=0, quantity=0):
     current_user = request.user
 
     # If the cart count is less than or equal to 0, then redirect back to shop
-    cart_items = CartItem.objects.filter(user=current_user)
+    cart_items = CartItem.objects.filter(user=current_user, is_active=True)
     cart_count = cart_items.count()
     if cart_count <= 0:
         return redirect('store')
@@ -123,15 +125,35 @@ def place_order(request, total=0, quantity=0,):
             yr = int(datetime.date.today().strftime('%Y'))
             dt = int(datetime.date.today().strftime('%d'))
             mt = int(datetime.date.today().strftime('%m'))
-            d = datetime.date(yr,mt,dt)
-            current_date = d.strftime("%Y%m%d") #20210305
+            d = datetime.date(yr, mt, dt)
+            current_date = d.strftime("%Y%m%d")  # 20210305
             order_number = current_date + str(data.id)
             data.order_number = order_number
             data.save()
 
-            order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
+            # Move the cart items to OrderProduct table
+            cart_items = CartItem.objects.filter(user=current_user)
+            for item in cart_items:
+                order_product = OrderProduct()
+                order_product.order = data
+                order_product.payment = data.payment
+                order_product.user = current_user
+                order_product.product = item.product
+                order_product.quantity = item.quantity
+                order_product.product_price = item.product.price
+                order_product.ordered = True
+                order_product.save()
+
+                # Many-to-Many fields
+                cart_item_variations = item.variations.all()
+                order_product.variations.set(cart_item_variations)
+                order_product.save()
+
+            # Clear the cart
+            CartItem.objects.filter(user=current_user).delete()
+
             context = {
-                'order': order,
+                'order': data,
                 'cart_items': cart_items,
                 'total': total,
                 'tax': tax,
@@ -167,3 +189,31 @@ def order_complete(request):
         return render(request, 'orders/order_complete.html', context)
     except (Payment.DoesNotExist, Order.DoesNotExist):
         return redirect('home')
+
+def generate_invoice(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    order_products = OrderProduct.objects.filter(order=order)
+
+    template_path = 'orders/invoice.html'
+    context = {
+        'order': order,
+        'order_products': order_products,
+    }
+
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="invoice_{order.order_number}.pdf"'
+
+    # Find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # Create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response
+    )
+
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
