@@ -8,7 +8,7 @@
 	<div class="container">
 
 		<!-- ============================ COMPONENT 1 ================================= -->
-		<h4 class="text-center mb-20">Revisa tu orden y realiza el pago/h4>
+		<h4 class="text-center mb-20">Revisa tu orden y realiza el pago </h4>
 		<div class="row">
 
 			<aside class="col-lg-8">
@@ -18,7 +18,7 @@
 						<p class="card-text mb-0">{{order.full_name}}</p>
 						<p class="card-text mb-0">{{order.full_address}}</p>
 						<p class="card-text mb-0">{{order.city}}, {{order.state}}</p>
-						<p class="card-text mb-0">{{order.country}}</p>
+						<p class="card-text mb-0">{{order.postalcode}}</p>
 						<p class="card-text mb-0">{{order.email}}</p>
 						<p class="card-text mb-0">{{order.phone}}</p>
 						{% if order.order_note %}
@@ -29,14 +29,14 @@
 					</div>
 				</div>
 				<div class="card">
-					<h5 class="card-header">Metodo de pago</h5>
+					<h5 class="card-header">Recuerda lo siguiente:</h5>
 					<div class="card-body">
-						<p class="card-text">PayPal</p>
+						<p class="card-text">Descarga la factura y envianosla al whatsapp para enviarte la cuenta de pago y realizar el pedido :3</p>
 
 					</div>
 				</div>
 				<div class="card">
-					<h5 class="card-header">Califica productos</h5>
+					<h5 class="card-header">Revisa tus productos</h5>
 					<div class="card-body">
 						<table class="table table-borderless table-shopping-cart">
 							<thead class="text-muted">
@@ -73,7 +73,7 @@
 									<td>
 										<div class="price-wrap">
 											<var class="price">$ {{ cart_item.sub_total }}</var>
-											<small class="text-muted"> $ {{ cart_item.product.price }} each </small>
+											<small class="text-muted"> $ {{ cart_item.product.price }} Cada </small>
 										</div> <!-- price-wrap .// -->
 									</td>
 

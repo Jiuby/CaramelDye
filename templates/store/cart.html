@@ -73,7 +73,7 @@
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right">
-	<a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-danger"> Remove</a>
+	<a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Seguro de que quieres eliminar este item?')" class="btn btn-danger"> Eliminar</a>
 	</td>
 </tr>
 {% endfor %}
@@ -93,16 +93,14 @@
 			</dl>
 			<dl class="dlist-align">
 			  <dt>Envio:</dt>
-			  <dd class="text-right"> $ {{tax}}</dd>
+			  <dd class="text-right"> Por confirmar</dd>
 			</dl>
 			<dl class="dlist-align">
 			  <dt>Precio total:</dt>
-			  <dd class="text-right text-dark b"><strong>$ {{grand_total}}</strong></dd>
+			  <dd class="text-right text-dark b"><strong>$ {{total}}</strong></dd>
 			</dl>
 			<hr>
-			<p class="text-center mb-3">
-				<img src="{% static './images/misc/payments.png' %}" height="26">
-			</p>
+
 			<a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
 			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continuar comprando</a>
 		</div> <!-- card-body.// -->
