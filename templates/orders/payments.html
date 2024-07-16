@@ -2,8 +2,33 @@
 {% load static %}
 
 {% block content %}
+    <style>
+    .custom-button {
+        background-color: blue;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        margin-right: 10px; /* Agrega espacio a la derecha del botón */
+        border-radius: 5px; /* Hace que los bordes del botón sean redondos */
+        font-size: 16px; /* Aumenta el tamaño de la fuente */
+        transition: background-color 0.3s; /* Agrega una transición suave al cambiar el color de fondo */
+    }
 
+    .custom-button:hover {
+        background-color: darkblue; /* Cambia el color de fondo cuando se pasa el mouse sobre el botón */
+    }
 
+    .custom-button:last-child {
+        margin-right: 0; /* Elimina el espacio a la derecha del último botón */
+        background-color: #b6811e; /* Cambia el color de fondo del segundo botón */
+    }
+
+    .custom-button:last-child:hover {
+        background-color: #9a6a15; /* Cambia el color de fondo del segundo botón cuando se pasa el mouse sobre él */
+    }
+</style>
+    
 <section class="section-content padding-y bg">
 	<div class="container">
 
@@ -104,14 +129,13 @@
 							<dd class="text-right text-dark b"><strong>$ {{grand_total}}</strong></dd>
 						</dl>
 						<hr>
-						<p class="text-center mb-3">
-							<img src="{% static './images/misc/payments.png' %}" height="26">
-						</p>
 
 
-						<div id="paypal-button-container">
-							<!-- PayPal Button Will Load -->
-						</div>
+
+						<div id="invoice-button-container">
+                            <button class="custom-button">Descargar Factura</button>
+                            <button class="custom-button">Whatsapp</button>
+                        </div>
 
 					</div> <!-- card-body.// -->
 				</div> <!-- card.// -->
