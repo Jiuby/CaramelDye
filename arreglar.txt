@@ -1,7 +1,6 @@
 dependiendo de la cantidad de stock que haya que ese sea el limite que pueda agregar el usuario
 
 __________________________________________________________
-realizar que cuando el cliente termine de realizar la compra se genere la factura y la pueda descargar
 modificar el menu de admin para volver español
 
 __________________________________________________________

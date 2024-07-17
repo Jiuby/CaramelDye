@@ -1,3 +1,4 @@
+{% load static %}
 {% load math_filters %}
 
 <!DOCTYPE html>
@@ -8,36 +9,74 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 20px;
         }
         .container {
-            width: 80%;
+            max-width: 800px;
             margin: auto;
-            overflow: hidden;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            page-break-inside: avoid;
         }
         #header {
-            background: #50b3a2;
+            background: #007BFF;
             color: #ffffff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #E8491D 3px solid;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
         }
-        #header a {
-            color: #ffffff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
+        #header h1 {
+            margin: 0;
+            font-size: 24px;
         }
-        .content {
+        .content h2 {
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
             margin-top: 20px;
+            color: #333;
+            font-size: 20px;
+        }
+        p {
+            color: #555;
+            margin: 5px 0;
         }
         table {
             width: 100%;
-            margin-bottom: 20px;
+            margin-top: 10px;
             border-collapse: collapse;
         }
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
             padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+        th {
+            background-color: #f0f4ff;
+            font-weight: bold;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        img {
+            max-width: 80px;
+            border-radius: 5px;
+        }
+        .total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #007BFF;
+            margin-top: 15px;
+            text-align: right;
+        }
+        .details, .products {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -48,43 +87,44 @@
         </div>
         <div class="content">
             <h2>Detalles del Pedido</h2>
-            <p><strong>Numero de ordenr:</strong> {{ order.order_number }}</p>
-            <p><strong>Nombre:</strong> {{ order.first_name }} {{ order.last_name }}</p>
-            <p><strong>Direccion:</strong> {{ order.address_line_1 }}, {{ order.address_line_2 }}, {{ order.city }}, {{ order.state }}, {{ order.postalcode }}</p>
-            <p><strong>Correo:</strong> {{ order.email }}</p>
-            <p><strong>Telefono:</strong> {{ order.phone }}</p>
-            <p><strong>Subtotal:</strong> ${{ order.order_total|subtract:order.tax }}</p>
-
-            <p><strong>Envio:</strong> ${{ order.tax }}</p>
-            <p><strong>Total:</strong> ${{ order.order_total }}</p>
+            <div class="details">
+                <p><strong>Número de orden:</strong> {{ order.order_number }}</p>
+                <p><strong>Nombre:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+                <p><strong>Dirección:</strong> {{ order.address_line_1 }}, {{ order.address_line_2 }}, {{ order.city }}, {{ order.state }}, {{ order.postalcode }}</p>
+                <p><strong>Correo:</strong> {{ order.email }}</p>
+                <p><strong>Teléfono:</strong> {{ order.phone }}</p>
+                <p><strong>Subtotal:</strong> ${{ order.order_total|subtract:order.tax }}</p>
+                <p><strong>Envío:</strong> ${{ order.tax }}</p>
+                <p class="total">Total: ${{ order.order_total }}</p>
+            </div>
 
             <h2>Productos</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Foto</th>
-                        <th>Variaciones</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in order_products %}
-                    <tr>
-                        <td>{{ item.product.product_name }}</td>
-                        <td><img src="{{ item.product.images.url }}" alt="{{ item.product.product_name }}" style="width: 100px;"></td>
-                        <td>
-                            {% for variation in item.variations.all %}
-                                {{ variation.variation_category }}: {{ variation.variation_value }} <br>
-                            {% endfor %}
-                        </td>
-                        <td>{{ item.quantity }}</td>
-                        <td>${{ item.product_price }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="products">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Variaciones</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order_products %}
+                        <tr>
+                            <td>{{ item.product.product_name }}</td>
+                            <td>
+                                {% for variation in item.variations.all %}
+                                    {{ variation.variation_category }}: {{ variation.variation_value }} <br>
+                                {% endfor %}
+                            </td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ item.product_price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>
