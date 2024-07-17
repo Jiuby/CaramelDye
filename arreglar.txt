@@ -1,8 +1,6 @@
-dependiendo de la cantidad de stock que haya que ese sea el limite que pueda agregar el usuario
 
 __________________________________________________________
 modificar el menu de admin para volver español
 
 __________________________________________________________
-volverla nativa xd._.
 cambiar colores para que sea tematica mas de la pagina
