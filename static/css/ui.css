@@ -447,7 +447,7 @@ p:last-child {
   position: relative;
 }
 .widget-header a {
-  color: #343a40;
+  color: #cccccc;
 }
 .widget-header a:hover {
   color: #3167eb;

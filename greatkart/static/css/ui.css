@@ -2,6 +2,7 @@
 /* ==== BASE STYLES ====*/
 /* ==================== GLOBAL STYLES ======================= */
 @import url("https://rsms.me/inter/inter.css");
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 html {
   font-family: "Inter", sans-serif;
   font-size: 15px;
@@ -240,7 +241,7 @@ article:after,
 }
 
 .bg {
-  background-color: #f8f9fa;
+  background-color: #101010;
 }
 
 .bg-white {
@@ -365,7 +366,11 @@ article:after,
 }
 
 .section-title {
-  color: #212529;
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-optical-sizing: auto;
+
+  color: #cccccc;
 }
 
 .title-text {
@@ -374,9 +379,11 @@ article:after,
   font-weight: bold;
   color: #212529;
 }
-
 .title-page {
-  color: #212529;
+  color: #cccccc;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .text-lg {
@@ -425,6 +432,7 @@ p:last-child {
   position: relative;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  background-color: #1C1C1C;
 }
 
 .brand-wrap .logo, .navbar-brand .logo {
@@ -447,10 +455,10 @@ p:last-child {
   position: relative;
 }
 .widget-header a {
-  color: #343a40;
+  color: #cccccc;
 }
 .widget-header a:hover {
-  color: #3167eb;
+  color: #ff007f;
 }
 .widget-header i {
   color: #969696;
@@ -467,7 +475,7 @@ p:last-child {
   right: -10px;
 }
 .widget-header:hover i {
-  color: #3167eb;
+  color: #ff007f;
 }
 
 /* desktop only */
@@ -600,15 +608,15 @@ p:last-child {
 }
 
 .btn-light {
-  background-color: #fff;
-  border-color: #e4e4e4;
+  background-color: #333333;
+  border-color: #9e0059;
 }
 .btn-light i {
   color: #969696;
 }
 .btn-light:hover {
-  background-color: #fff;
-  border-color: #989898;
+  background-color: #9e0059;
+  border-color: #FFFFFF;
 }
 
 .btn .text + i {
@@ -797,10 +805,10 @@ ul.row, ul.row-sm {
   margin-bottom: 5px;
 }
 .list-menu a {
-  color: #343a40;
+  color: #FFFFFF;
 }
 .list-menu a:hover {
-  color: #3167eb;
+  color: #ff007f;
 }
 
 .cols-two {
@@ -828,11 +836,11 @@ a[class*=card]:hover .title {
 
 /* BASE STYLE FOR PRODUCT ITEM */
 [class*=card-product] a.title {
-  color: #212529;
+  color: #ffffff;
   display: block;
 }
 [class*=card-product] a.title:hover {
-  color: #3167eb;
+  color: #ff007f;
 }
 [class*=card-product] .badge {
   top: 10px;
@@ -1060,7 +1068,7 @@ a[class*=card]:hover .title {
 
 .price {
   font-weight: 600;
-  color: #212529;
+  color: #FFFFFF;
 }
 
 .price-old {
@@ -1268,7 +1276,7 @@ a[class*=card]:hover .title {
   max-width: 46px;
   font-weight: bold;
   flex-basis: 46px;
-  border-color: #e4e4e4;
+  border-color: #000000;
   flex-grow: 0;
 }
 .input-spinner .btn {

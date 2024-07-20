@@ -1,6 +1,6 @@
 
 __________________________________________________________
-modificar el menu de admin para volver español
 
 __________________________________________________________
 cambiar colores para que sea tematica mas de la pagina
+agregar page 404
