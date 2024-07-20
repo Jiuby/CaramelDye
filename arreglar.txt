@@ -2,5 +2,5 @@
 __________________________________________________________
 
 __________________________________________________________
-cambiar colores para que sea tematica mas de la pagina
 agregar page 404
+agregar productos a la pagina y volverla seria xd
