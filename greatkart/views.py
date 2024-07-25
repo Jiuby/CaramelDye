@@ -14,6 +14,3 @@ def home(request):
         'reviews': reviews,
     }
     return render(request, 'home.html', context)
-
-def handler404(request, exepction):
-    return render(request, '404.html')

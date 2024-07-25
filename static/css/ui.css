@@ -2,7 +2,6 @@
 /* ==== BASE STYLES ====*/
 /* ==================== GLOBAL STYLES ======================= */
 @import url("https://rsms.me/inter/inter.css");
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 html {
   font-family: "Inter", sans-serif;
   font-size: 15px;
@@ -241,7 +240,7 @@ article:after,
 }
 
 .bg {
-  background-color: #101010;
+  background-color: #f8f9fa;
 }
 
 .bg-white {
@@ -366,11 +365,7 @@ article:after,
 }
 
 .section-title {
-  font-family: "Montserrat", sans-serif;
-  font-style: normal;
-  font-optical-sizing: auto;
-
-  color: #cccccc;
+  color: #212529;
 }
 
 .title-text {
@@ -379,11 +374,9 @@ article:after,
   font-weight: bold;
   color: #212529;
 }
+
 .title-page {
-  color: #cccccc;
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+  color: #212529;
 }
 
 .text-lg {
@@ -432,7 +425,6 @@ p:last-child {
   position: relative;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: #1C1C1C;
 }
 
 .brand-wrap .logo, .navbar-brand .logo {
@@ -458,7 +450,7 @@ p:last-child {
   color: #cccccc;
 }
 .widget-header a:hover {
-  color: #ff007f;
+  color: #3167eb;
 }
 .widget-header i {
   color: #969696;
@@ -475,7 +467,7 @@ p:last-child {
   right: -10px;
 }
 .widget-header:hover i {
-  color: #ff007f;
+  color: #3167eb;
 }
 
 /* desktop only */
@@ -608,15 +600,15 @@ p:last-child {
 }
 
 .btn-light {
-  background-color: #333333;
-  border-color: #9e0059;
+  background-color: #fff;
+  border-color: #e4e4e4;
 }
 .btn-light i {
   color: #969696;
 }
 .btn-light:hover {
-  background-color: #9e0059;
-  border-color: #FFFFFF;
+  background-color: #fff;
+  border-color: #989898;
 }
 
 .btn .text + i {
@@ -805,10 +797,10 @@ ul.row, ul.row-sm {
   margin-bottom: 5px;
 }
 .list-menu a {
-  color: #FFFFFF;
+  color: #343a40;
 }
 .list-menu a:hover {
-  color: #ff007f;
+  color: #3167eb;
 }
 
 .cols-two {
@@ -836,11 +828,11 @@ a[class*=card]:hover .title {
 
 /* BASE STYLE FOR PRODUCT ITEM */
 [class*=card-product] a.title {
-  color: #ffffff;
+  color: #212529;
   display: block;
 }
 [class*=card-product] a.title:hover {
-  color: #ff007f;
+  color: #3167eb;
 }
 [class*=card-product] .badge {
   top: 10px;
@@ -1068,7 +1060,7 @@ a[class*=card]:hover .title {
 
 .price {
   font-weight: 600;
-  color: #FFFFFF;
+  color: #212529;
 }
 
 .price-old {
@@ -1276,7 +1268,7 @@ a[class*=card]:hover .title {
   max-width: 46px;
   font-weight: bold;
   flex-basis: 46px;
-  border-color: #000000;
+  border-color: #e4e4e4;
   flex-grow: 0;
 }
 .input-spinner .btn {
