@@ -94,75 +94,84 @@ def place_order(request, total=0, quantity=0):
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            # Store all the billing information inside Order table
-            data = Order()
-            data.user = current_user
-            data.first_name = form.cleaned_data['first_name']
-            data.last_name = form.cleaned_data['last_name']
-            data.phone = form.cleaned_data['phone']
-            data.email = form.cleaned_data['email']
-            data.address_line_1 = form.cleaned_data['address_line_1']
-            data.address_line_2 = form.cleaned_data['address_line_2']
-            data.postalcode = form.cleaned_data['postalcode']
-            data.state = form.cleaned_data['state']
-            data.city = form.cleaned_data['city']
-            data.order_note = form.cleaned_data['order_note']
+            try:
+                # Store all the billing information inside Order table
+                data = Order()
+                data.user = current_user
+                data.first_name = form.cleaned_data['first_name']
+                data.last_name = form.cleaned_data['last_name']
+                data.phone = form.cleaned_data['phone']
+                data.email = form.cleaned_data['email']
+                data.address_line_1 = form.cleaned_data['address_line_1']
+                data.address_line_2 = form.cleaned_data['address_line_2']
+                data.postalcode = form.cleaned_data['postalcode']
+                data.state = form.cleaned_data['state']
+                data.city = form.cleaned_data['city']
+                data.order_note = form.cleaned_data['order_note']
 
-            # Calculate tax based on state
-            if data.state.lower() == 'bogota':
-                tax = 7000
-            else:
-                tax = 15000
+                # Calculate tax based on state
+                if data.state.lower() == 'bogota':
+                    tax = 7000
+                else:
+                    tax = 15000
 
-            grand_total = total + tax
+                grand_total = total + tax
 
-            data.order_total = grand_total
-            data.tax = tax
-            data.ip = request.META.get('REMOTE_ADDR')
-            data.save()
+                data.order_total = grand_total
+                data.tax = tax
+                data.ip = request.META.get('REMOTE_ADDR')
+                data.save()
 
-            # Generate order number
-            yr = int(datetime.date.today().strftime('%Y'))
-            dt = int(datetime.date.today().strftime('%d'))
-            mt = int(datetime.date.today().strftime('%m'))
-            d = datetime.date(yr, mt, dt)
-            current_date = d.strftime("%Y%m%d")  # 20210305
-            order_number = current_date + str(data.id)
-            data.order_number = order_number
-            data.save()
+                # Generate order number
+                yr = int(datetime.date.today().strftime('%Y'))
+                dt = int(datetime.date.today().strftime('%d'))
+                mt = int(datetime.date.today().strftime('%m'))
+                d = datetime.date(yr, mt, dt)
+                current_date = d.strftime("%Y%m%d")  # 20210305
+                order_number = current_date + str(data.id)
+                data.order_number = order_number
+                data.save()
 
-            # Move the cart items to OrderProduct table
-            cart_items = CartItem.objects.filter(user=current_user)
-            for item in cart_items:
-                order_product = OrderProduct()
-                order_product.order = data
-                order_product.payment = data.payment
-                order_product.user = current_user
-                order_product.product = item.product
-                order_product.quantity = item.quantity
-                order_product.product_price = item.product.price
-                order_product.ordered = True
-                order_product.save()
+                # Move the cart items to OrderProduct table
+                cart_items = CartItem.objects.filter(user=current_user)
+                for item in cart_items:
+                    order_product = OrderProduct()
+                    order_product.order = data
+                    order_product.payment = data.payment
+                    order_product.user = current_user
+                    order_product.product = item.product
+                    order_product.quantity = item.quantity
+                    order_product.product_price = item.product.price
+                    order_product.ordered = True
+                    order_product.save()
 
-                # Many-to-Many fields
-                cart_item_variations = item.variations.all()
-                order_product.variations.set(cart_item_variations)
-                order_product.save()
+                    # Many-to-Many fields
+                    cart_item_variations = item.variations.all()
+                    order_product.variations.set(cart_item_variations)
+                    order_product.save()
 
-            # Clear the cart
-            CartItem.objects.filter(user=current_user).delete()
+                # Clear the cart
+                CartItem.objects.filter(user=current_user).delete()
 
-            context = {
-                'order': data,
-                'cart_items': cart_items,
-                'total': total,
-                'tax': tax,
-                'grand_total': grand_total,
-            }
-            return render(request, 'orders/payments.html', context)
+                context = {
+                    'order': data,
+                    'cart_items': cart_items,
+                    'total': total,
+                    'tax': tax,
+                    'grand_total': grand_total,
+                }
+                return render(request, 'orders/payments.html', context)
+            except Exception as e:
+                # If there's an error, retry with the received POST data
+                print(f"Error processing order: {e}")
+                # Here you can choose to log the error, send a notification, etc.
+                received_data = request.POST
+                return render(request, 'orders/payments.html', {'received_data': received_data})
+        else:
+            # Handle the case when the form is not valid
+            return redirect('checkout')
     else:
         return redirect('checkout')
-
 
 def order_complete(request):
     order_number = request.GET.get('order_number')
