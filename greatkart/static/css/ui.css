@@ -1008,6 +1008,7 @@ a[class*=card]:hover .title {
 
 .card .img-wrap {
   overflow: hidden;
+  background-color: #ffff;
 }
 
 .icontext {
