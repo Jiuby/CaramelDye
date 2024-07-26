@@ -3,7 +3,7 @@ from .models import Product, ReviewRating, ProductGallery
 from category.models import Category
 from carts.models import CartItem
 from django.db.models import Q
-
+from django.core.paginator import Paginator
 from carts.views import _cart_id
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse
@@ -16,23 +16,22 @@ def store(request, category_slug=None):
     categories = None
     products = None
 
-    if category_slug != None:
+    if category_slug:
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=categories, is_available=True)
-        paginator = Paginator(products, 1)
-        page = request.GET.get('page')
-        paged_products = paginator.get_page(page)
-        product_count = products.count()
     else:
-        products = Product.objects.all().filter(is_available=True).order_by('id')
-        paginator = Paginator(products, 9)
-        page = request.GET.get('page')
-        paged_products = paginator.get_page(page)
-        product_count = products.count()
+        products = Product.objects.filter(is_available=True).order_by('id')
+
+    paginator = Paginator(products, 9)  # 9 productos por página
+    page = request.GET.get('page')
+    paged_products = paginator.get_page(page)
+    product_count = products.count()
 
     context = {
         'products': paged_products,
         'product_count': product_count,
+        'categories': Category.objects.all(),  # Agregar categorías al contexto
+        'category_slug': category_slug,  # Agregar el slug de la categoría al contexto
     }
     return render(request, 'store/store.html', context)
 
