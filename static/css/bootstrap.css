@@ -4605,16 +4605,16 @@ input[type=button].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #3167eb;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
+  color: #FFFFFF;
+  background-color: #333333;
+  border: 1px solid #9e0059;
 }
 .page-link:hover {
   z-index: 2;
-  color: #1244bd;
+  color: #FFFFFF;
   text-decoration: none;
-  background-color: #e4e4e4;
-  border-color: #dee2e6;
+  background-color: #9e0059;
+  border-color: #FFFFFF;
 }
 .page-link:focus {
   z-index: 2;
@@ -4634,15 +4634,15 @@ input[type=button].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #3167eb;
-  border-color: #3167eb;
+  background-color: #333333;
+  border-color: #9e0059;
 }
 .page-item.disabled .page-link {
-  color: #545454;
+  color: #fff;
   pointer-events: none;
   cursor: auto;
-  background-color: #fff;
-  border-color: #dee2e6;
+  background-color: #333333;
+  border-color: #9e0059;
 }
 
 .pagination-lg .page-link {
