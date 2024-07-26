@@ -87,10 +87,12 @@
               </div>
             {% endif %}
           </div>
-          <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
-            <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-            <span class="badge badge-pill badge-danger notify">{{cart_count}}</span>
-          </a>
+            <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+              <div class="d-flex justify-content-center align-items-center">
+                <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+                <span class="badge badge-pill badge-danger notify">{{cart_count}}</span>
+              </div>
+            </a>
         </div>
       </div>
     </div>
