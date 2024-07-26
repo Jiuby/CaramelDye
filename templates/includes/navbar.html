@@ -1,94 +1,99 @@
 {% load static %}
 
+<style>
+    @media (max-width: 767px) {
+  .category-wrap {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .category-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>
 <header class="section-header">
-<nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
-<div class="container">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTop4">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-      <a href="https://www.instagram.com/akira_.666/" class="nav-link">   Made By Akira </a>
-    </li>
-    <li class="nav-item dropdown">
-      <a href="#" class="nav-link"> Made with Love ♡ </a>
-
-    </li>
-    </ul>
-    <ul class="navbar-nav">
-    <li><a href="mailto:juane8w@gmail.com" class="nav-link"> <i class="fa fa-envelope"></i> Correo </a></li>
-    <li><a href="https://api.whatsapp.com/send?phone=573053111031" class="nav-link"> <i class="fa fa-phone"></i> Whatsapp </a></li>
-  </ul> <!-- list-inline //  -->
-  </div> <!-- navbar-collapse .// -->
-</div> <!-- container //  -->
-</nav>
-
-<section class="header-main border-bottom">
-  <div class="container">
-<div class="row align-items-center">
-  <div class="col-lg-2 col-md-3 col-6">
-    <a href="{% url 'home' %}" class="brand-wrap">
-      <img class="logo" src="{% static '/images/logito.png' %}" style="width:auto; height:200px;">
-    </a> <!-- brand-wrap.// -->
-  </div>
-  <div class="col-lg col-sm col-md col-6 flex-grow-0">
-    <div class="category-wrap dropdown d-inline-block float-right">
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-bars"></i> Categorias
+  <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="{% url 'store' %}">Todos los productos </a>
-        {% for category in links %}
-          <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }} </a>
-        {% endfor %}
+      <div class="collapse navbar-collapse" id="navbarTop4">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="https://www.instagram.com/akira_.666/" class="nav-link">Made By Akira</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Made with Love ♡</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li><a href="mailto:juane8w@gmail.com" class="nav-link"><i class="fa fa-envelope"></i> Correo</a></li>
+          <li><a href="https://api.whatsapp.com/send?phone=573053111031" class="nav-link"><i class="fa fa-phone"></i> Whatsapp</a></li>
+        </ul>
       </div>
-    </div>  <!-- category-wrap.// -->
-  </div> <!-- col.// -->
-  <a href="{% url 'store' %}" class="btn btn-outline-primary">Tienda</a>
-  <div class="col-lg  col-md-6 col-sm-12 col">
-    <form action="{% url 'search' %}" class="search" method='GET'>
-      <div class="input-group w-100">
-          <input type="text" class="form-control" style="width:60%;" placeholder="Buscar" name="keyword">
+    </div>
+  </nav>
 
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">
-              <i class="fa fa-search"></i>
+  <section class="header-main border-bottom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-2 col-md-3 col-6">
+          <a href="{% url 'home' %}" class="brand-wrap">
+            <img class="logo" src="{% static '/images/logito.png' %}" style="width:auto; height:200px;">
+          </a>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12 text-right order-lg-3 mt-2 mt-lg-0">
+          <a href="{% url 'store' %}" class="btn btn-outline-primary category-button">Tienda</a>
+          <div class="category-wrap dropdown d-inline-block">
+            <button type="button" class="btn btn-primary dropdown-toggle category-button" data-toggle="dropdown">
+              <i class="fa fa-bars"></i> Categorías
             </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item " href="{% url 'store' %}">Todos los productos</a>
+              {% for category in links %}
+                <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+              {% endfor %}
+            </div>
           </div>
         </div>
-    </form> <!-- search-wrap .end// -->
-  </div> <!-- col.// -->
-  <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-        <div class="d-flex justify-content-end mb-3 mb-lg-0">
-          {% if user.id is None %}
-          <div class="widget-header">
-            <small class="title text-muted">Bienvenido broki :3!</small>
-            <div>
-              <a href="{% url 'login' %}">Iniciar sesion</a> <span class="dark-transp"> | </span>
-              <a href="{% url 'register' %}"> Registrar</a>
+        <div class="col-lg-4 col-md-8 col-12 order-lg-2 mt-2 mt-lg-0">
+          <form action="{% url 'search' %}" class="search" method="GET">
+            <div class="input-group w-100">
+              <input type="text" class="form-control" placeholder="Buscar" name="keyword">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
             </div>
-          </div>
-          {% else %}
+          </form>
+        </div>
+        <div class="col-lg-3 col-md-4 col-12 order-lg-1 text-lg-right text-center mt-2 mt-lg-0">
           <div class="widget-header">
-            <small class="title text-muted">Bienvenido {{user.first_name}}!</small>
-            <div>
-              <a href="{% url 'dashboard' %}">Panel de control</a> <span class="dark-transp"> | </span>
-              <a href="{% url 'logout' %}"> Cerrar sesion</a>
-            </div>
+            {% if user.id is None %}
+              <small class="title text-muted">Bienvenido broki :3!</small>
+              <div>
+                <a href="{% url 'login' %}">Iniciar sesión</a> <span class="dark-transp"> | </span>
+                <a href="{% url 'register' %}">Registrar</a>
+              </div>
+            {% else %}
+              <small class="title text-muted">Bienvenido {{user.first_name}}!</small>
+              <div>
+                <a href="{% url 'dashboard' %}">Panel de control</a> <span class="dark-transp"> | </span>
+                <a href="{% url 'logout' %}">Cerrar sesión</a>
+              </div>
+            {% endif %}
           </div>
-          {% endif %}
           <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
             <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
             <span class="badge badge-pill badge-danger notify">{{cart_count}}</span>
           </a>
-        </div> <!-- widgets-wrap.// -->
-      </div> <!-- col.// -->
-</div> <!-- row.// -->
-  </div> <!-- container.// -->
-</section> <!-- header-main .// -->
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
 
-
-
-
-</header> <!-- section-header.// -->
