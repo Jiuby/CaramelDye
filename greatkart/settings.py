@@ -29,7 +29,7 @@ SECRET_KEY = '$_j_w6heroy5n)&_jy8si57t5jvv)g88vbm(oh=ybr=g=i6akw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool) # True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["carameldye.azurewebsites.net", "http://127.0.0.1:0000/"]
 
 
 # Application definition
