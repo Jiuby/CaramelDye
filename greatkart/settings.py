@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["carameldye.azurewebsites.net", "http://127.0.0.1:0000/"]
 
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
