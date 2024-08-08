@@ -3,6 +3,33 @@
 
 {% block content %}
 
+    <style>
+    .thumb img {
+        width: 100px; /* Set a fixed width */
+        height: 100px; /* Set a fixed height */
+        object-fit: cover; /* Maintain aspect ratio and cover the area */
+        margin: 5px; /* Add some spacing between images */
+        border: 1px solid #ddd; /* Add a border for better visibility */
+        border-radius: 5px; /* Add rounded corners */
+    }
+</style>
+
+    <style>
+        .img-big-wrap {
+            cursor: zoom-in;
+            overflow: hidden; /* Ensure the image doesn't overflow the container */
+            position: relative;
+        }
+
+        .img-big-wrap img {
+            transition: transform 0.3s ease, transform-origin 0.3s ease; /* Smooth transition for the zoom effect */
+            width: 100%; /* Ensure the image takes the full width of the container */
+        }
+
+        .img-big-wrap:hover img {
+            transform: scale(1.5); /* Scale the image to 150% on hover */
+        }
+    </style>
 <section class="section-content padding-y bg">
 	<div class="container">
 
@@ -89,6 +116,23 @@
 
 	</div> <!-- container .//  -->
 </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const imgWrap = document.querySelector('.img-big-wrap');
+        const img = imgWrap.querySelector('img');
+
+        imgWrap.addEventListener('mousemove', function(e) {
+            const rect = imgWrap.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const xPercent = (x / rect.width) * 100;
+            const yPercent = (y / rect.height) * 100;
+
+            img.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+        });
+    });
+</script>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 {% endblock %}
