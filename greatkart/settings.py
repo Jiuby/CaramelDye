@@ -97,7 +97,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DATABASES = {
-    'default': dj_database_url.parse('mysql://root:NZJoAWKJEJxLHjTOzvOZoDirTqXBkJiD@monorail.proxy.rlwy.net:27745/railway')
+    'default': dj_database_url.parse('mysql://root:NZJoAWKJEJxLHjTOzvOZoDirTqXBkJiD@monorail.proxy.rlwy.net:27745/railway') # Mera regalada de base de datos💀
 }
 
 
